@@ -38,4 +38,4 @@ I evaluated both the models using accuracy score and optimized them using GridSe
 
 Logistic Regression performed better on both validation and test sets.
 
-To check the model's performance, I used sample reviews from https://www.tripadvisor.in/ShowUserReviews-g297679-d2490644-r476344977-Quality_Restaurant-Ooty_Udhagamandalam_The_Nilgiris_District_Tamil_Nadu.html. The model identified the sentiment correctly.
+To test the model, I used sample reviews from https://www.tripadvisor.in/ShowUserReviews-g297679-d2490644-r476344977-Quality_Restaurant-Ooty_Udhagamandalam_The_Nilgiris_District_Tamil_Nadu.html. The model identified the sentiment correctly.
