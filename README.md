@@ -31,7 +31,7 @@ I evaluated both the models using accuracy score and optimized them using GridSe
 
 ## Model Evaluation
 
-| Syntax      | Description | Test Text     |
-| :---        |    :----:   |          ---: |
-| Header      | Title       | Here's this   |
+|   Model       | Best Parameter | Accuracy Score|
+|   :----:       |    :----:   |          :----: |
+| Multinomial NB| alpha = 1     | 0.8            |
 | Paragraph   | Text        | And more      |
