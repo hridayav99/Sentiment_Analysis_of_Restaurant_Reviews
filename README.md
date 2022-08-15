@@ -29,9 +29,13 @@ I used 2 classification algorithms-
 
 I evaluated both the models using accuracy score and optimized them using GridSearchCV with 5 folds.
 
-## Model Evaluation
+## Model Evaluation and Performance
 
 |   Model            | Best Parameter | Accuracy Score|
 |   :----:           |    :----:      |     :----:    |
 | Multinomial NB     | alpha = 1      | 0.8           |
 | Logistic Regression| C= 10          | 0.845         |
+
+Logistic Regression performed better on both validation and test sets.
+
+To check the model's performance, I used sample reviews from https://www.tripadvisor.in/ShowUserReviews-g297679-d2490644-r476344977-Quality_Restaurant-Ooty_Udhagamandalam_The_Nilgiris_District_Tamil_Nadu.html. The model identified the sentiment correctly.
