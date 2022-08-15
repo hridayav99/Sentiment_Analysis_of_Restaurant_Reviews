@@ -1,4 +1,4 @@
-# Project Name - Sentiment Analysis of Restuarant Reviews
+# Project Name - Sentiment Analysis of Restaurant Reviews
 
 *	Applied Natural Language Processing techniques on the dataset containing reviews:
     * Pre-processing using regex; tokenization
