@@ -31,7 +31,7 @@ I evaluated both the models using accuracy score and optimized them using GridSe
 
 ## Model Evaluation
 
-|   Model       | Best Parameter | Accuracy Score|
-|   :----:       |    :----:   |          :----: |
-| Multinomial NB| alpha = 1     | 0.8            |
-| Paragraph   | Text        | And more      |
+|   Model            | Best Parameter | Accuracy Score|
+|   :----:           |    :----:      |     :----:    |
+| Multinomial NB     | alpha = 1      | 0.8           |
+| Logistic Regression| C= 10          | 0.845         |
