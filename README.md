@@ -31,5 +31,7 @@ I evaluated both the models using accuracy score and optimized them using GridSe
 
 ## Model Evaluation
 
-|    Model     | Best parameter | Accuracy Score |
-|   :----:|    |     :----:     |     :----:     |
+| Syntax      | Description | Test Text     |
+| :---        |    :----:   |          ---: |
+| Header      | Title       | Here's this   |
+| Paragraph   | Text        | And more      |
