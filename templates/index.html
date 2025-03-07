@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        function analyzeSentiment() {
+            let text = document.getElementById("text").value;
+            let result = document.getElementById("result");
+            let loader = document.getElementById("loader");
+
+            if (text.trim() === "") {
+                result.innerHTML = "<span class='error'>Please enter a review.</span>";
+                return;
+            }
+
+            loader.style.display = "inline-block";
+            result.innerHTML = "";
+
+            fetch("/analyze", {
+                method: "POST",
+                body: new URLSearchParams({ text: text }),
+                headers: { "Content-Type": "application/x-www-form-urlencoded" }
+            })
+            .then(response => response.json())
+            .then(data => {
+                loader.style.display = "none";
+                result.innerHTML = `<span class="${data.sentiment.toLowerCase()}">
+                    Sentiment: ${data.sentiment} (Confidence: ${data.confidence}%)
+                </span>`;
+            })
+            .catch(error => {
+                loader.style.display = "none";
+                result.innerHTML = "<span class='error'>Error analyzing sentiment.</span>";
+            });
+        }
+
+        function uploadCSV() {
+            let formData = new FormData();
+            let fileInput = document.getElementById("fileInput");
+            let file = fileInput.files[0];
+
+            if (!file) {
+                alert("Please select a CSV file.");
+                return;
+            }
+
+            formData.append("file", file);
+            document.getElementById("fileLoader").style.display = "inline-block";
+
+            fetch("/upload", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("fileLoader").style.display = "none";
+
+                let resultsBody = document.getElementById("resultsBody");
+                resultsBody.innerHTML = ""; 
+
+                data.results.forEach(row => {
+                    let tr = document.createElement("tr");
+                    tr.innerHTML = `<td>${row.review}</td>
+                                    <td class="${row.sentiment.toLowerCase()}">${row.sentiment}</td>
+                                    <td>${row.confidence}%</td>`;
+                    resultsBody.appendChild(tr);
+                });
+
+                document.getElementById("exportButton").style.display = "block";
+            })
+            .catch(error => {
+                document.getElementById("fileLoader").style.display = "none";
+                alert("Error processing CSV file.");
+            });
+        }
+
+
+        function exportResults() {
+            window.location.href = "/export";
+        }
+    </script>
+
+</head>
+<body>
+    <div class="container">
+        <h2>Restaurant Review Sentiment Analysis</h2>
+
+        <!-- Single Review Analysis -->
+        <textarea id="text" rows="4" placeholder="Enter your review..."></textarea>
+        <button onclick="analyzeSentiment()">Analyze</button>
+        <div id="loader" class="loader" style="display: none;"></div>
+        <p id="result"></p>
+
+        <hr>
+
+        <!-- CSV Upload Section -->
+        <h3>Upload CSV for Bulk Analysis</h3>
+        <input type="file" id="fileInput" accept=".csv">
+        <button onclick="uploadCSV()">Upload</button>
+        <div id="fileLoader" class="loader" style="display: none;"></div>
+
+        <!-- Scrollable Results Table -->
+        <div class="results-container">
+            <table id="resultsTable">
+                <thead>
+                    <tr>
+                        <th>Review</th>
+                        <th>Sentiment</th>
+                        <th>Confidence</th>
+                    </tr>
+                </thead>
+                <tbody id="resultsBody">
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Export Results Button -->
+        <button id="exportButton" onclick="exportResults()" style="display: none;">Export Results</button>
+    </div>
+</body>
+</html>
