@@ -1,7 +1,8 @@
-from flask import Flask, render_template, request, jsonify, send_file
+from flask import Flask, render_template, request, jsonify, send_file, send_from_directory
 import pickle  
 import numpy as np
 import pandas as pd
+import os
 
 app = Flask(__name__)
 
@@ -48,7 +49,7 @@ def upload():
 
         # Process each review
         df["sentiment"], df["confidence"] = zip(*df[review_col].astype(str).apply(predict_sentiment))
-        df.to_csv("static/results.csv", index=False)
+        df.to_csv("output/results.csv", index=False)
 
         results = df[[review_col, "sentiment", "confidence"]].to_dict(orient="records")
         return jsonify({"results": results})
@@ -60,7 +61,8 @@ def upload():
 
 @app.route("/export")
 def export():
-    return send_file("static/results.csv", as_attachment=True)
+    #absolute_path = os.path.abspath("output/results.csv") 
+    return send_file('output/results.csv', as_attachment=True)
 
 if __name__ == "__main__":
     app.run(debug=True)
