@@ -1,5 +1,8 @@
 # Project Name - Sentiment Analysis of Restaurant Reviews
 
+## 🚀 Live Web App
+Check out the live web app here: **[Sentiment Analysis Web App](https://sentimentanalysis-ilhv.onrender.com/)**
+
 *	Applied Natural Language Processing techniques on the dataset containing reviews:
     * Pre-processing using regex; tokenization
     * Lemmatization
